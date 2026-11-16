@@ -3,6 +3,7 @@ package com.example.reto1
 
 import android.os.Bundle
 import android.webkit.WebViewClient
+import android.widget.SeekBar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.reto1.databinding.ActivityMainBinding
@@ -24,6 +25,29 @@ class MainActivity : AppCompatActivity() {
 
         // Funcionalidad 1 (Reto 5): detectamos qué CheckBox marca el usuario en tiempo real
         configurarCheckBoxes()
+
+        // Funcionalidad 2 (Reto 5): actualizamos el texto del nivel al mover la barra SeekBar
+        configurarSeekBar()
+    }
+
+    /**
+     * Configura el listener del SeekBar usando ViewBinding.
+     * Cada vez que el usuario desliza la barra, actualiza txtNivel con el porcentaje actual.
+     */
+    private fun configurarSeekBar() {
+        binding.seekNivel.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                binding.txtNivel.text = "Nivel seleccionado: $progress%"
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // No hace falta acción al empezar a pulsar la barra
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // No hace falta acción al soltar la barra
+            }
+        })
     }
 
     /**
